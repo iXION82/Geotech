@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 
 function WavyRings({ duration = 150, className = "" }) {
   return (
@@ -22,9 +23,41 @@ function WavyRings({ duration = 150, className = "" }) {
 }
 
 export function AnimatedTopography() {
+  const mouseX = useSpring(0, { stiffness: 40, damping: 20 });
+  const mouseY = useSpring(0, { stiffness: 40, damping: 20 });
+  
+  // Parallax inverse movement
+  const xOffset = useTransform(mouseX, [0, 2000], [25, -25]);
+  const yOffset = useTransform(mouseY, [0, 2000], [25, -25]);
+
+  // Dynamic CSS Mask passing directly to GPU without React renders
+  const maskImage = useMotionTemplate`radial-gradient(circle 500px at ${mouseX}px ${mouseY}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 100%)`;
+
+  useEffect(() => {
+    // initialize at center safely in browser
+    if (typeof window !== "undefined") {
+      mouseX.set(window.innerWidth / 2);
+      mouseY.set(window.innerHeight / 2);
+    }
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-difference text-stone-200 opacity-[0.4]">
-      <WavyRings duration={220} className="w-[150vw] h-[150vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-    </div>
+    <motion.div 
+      className="fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-difference text-stone-200 opacity-[0.4]"
+      style={{
+        maskImage,
+        WebkitMaskImage: maskImage
+      }}
+    >
+      <motion.div style={{ x: xOffset, y: yOffset }} className="absolute inset-0 w-full h-full">
+        <WavyRings duration={220} className="w-[150vw] h-[150vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+      </motion.div>
+    </motion.div>
   );
 }
