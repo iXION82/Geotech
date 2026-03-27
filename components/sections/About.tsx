@@ -15,12 +15,12 @@ export function About() {
               About the Department
             </h2>
           </FadeIn>
-          
-          <FadeIn delay={0.4} direction="up">
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2e3f2b] leading-[1.1] mb-8">
-              Pioneering the ground we build upon.
-            </h3>
-          </FadeIn>
+                    <FadeIn delay={0.3}>
+              <h3 className="text-5xl md:text-6xl lg:text-7xl font-serif text-stone-800 leading-[1.1] md:leading-[1.1]">
+                Forging the Future of<br/>
+                <span className="text-[#96a495] italic block mt-2">Earth Sciences.</span>
+              </h3>
+            </FadeIn>
           
           <FadeIn delay={0.6} direction="up">
             <div className="bg-[#f4f7f1]/95 backdrop-blur-sm p-6 md:p-8 shadow-sm border border-[#e3eae0]">

@@ -36,10 +36,11 @@ export function EntryFacilities() {
             </div>
           </div>
           <div className="md:col-span-4 flex flex-col justify-end space-y-6 pb-6">
-            <FadeIn direction="up">
-              <h2 className="text-4xl lg:text-5xl font-serif text-[#383632] leading-[1.15]">
-                The gateway to discovery.
-              </h2>
+            <FadeIn delay={0.3}>
+              <h3 className="text-5xl md:text-6xl lg:text-7xl font-serif text-stone-800 leading-[1.1] md:leading-[1.1] mb-6">
+                Industry-Leading<br/>
+                <span className="text-[#8c8577] italic block mt-2">Equipment.</span>
+              </h3>
             </FadeIn>
             <FadeIn delay={0.2} direction="up">
               <p className="text-[#5c5a53] font-light leading-relaxed">

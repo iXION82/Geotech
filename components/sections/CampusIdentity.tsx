@@ -18,7 +18,10 @@ export function CampusIdentity() {
           </div>
           <div className="w-full md:w-2/5 flex flex-col justify-center">
             <FadeIn delay={0.3} direction="up">
-              <h3 className="text-3xl md:text-4xl font-serif text-[#e6e8e3] mb-6">A Vibrant Community</h3>
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#e6e8e3] leading-[1.1] md:leading-[1.1] mb-6">
+                A Vibrant<br/>
+                <span className="text-[#9ba39d] italic block mt-2">Community.</span>
+              </h3>
               <p className="text-[#9ba39d] font-light leading-relaxed">
                 Beyond the laboratories and lecture halls, IIT ISM Dhanbad offers a rich campus life. Nestled in the heart of India's coal capital, the campus provides a unique blend of industrial proximity and academic serenity.
               </p>
@@ -35,7 +38,10 @@ export function CampusIdentity() {
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-center md:items-end md:text-right">
             <FadeIn delay={0.3} direction="up" className="max-w-md">
-              <h3 className="text-3xl md:text-4xl font-serif text-[#e6e8e3] mb-6">Heritage & Innovation</h3>
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#e6e8e3] leading-[1.1] md:leading-[1.1] mb-6">
+                Heritage &<br/>
+                <span className="text-[#9ba39d] italic block mt-2">Innovation.</span>
+              </h3>
               <p className="text-[#9ba39d] font-light leading-relaxed">
                 Our department bridges the gap between storied heritage and modern technological advancements. Students are immersed in an environment that honors history while demanding future-forward thinking.
               </p>

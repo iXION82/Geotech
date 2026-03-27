@@ -31,3 +31,9 @@ h1, h2, h3, h4, h5, h6 {
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes marquee {
+  100% {
+    transform: translateX(-50%);
+  }
+}
