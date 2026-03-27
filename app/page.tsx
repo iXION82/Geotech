@@ -8,7 +8,7 @@ import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-stone-50 overflow-hidden">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Hero />
       <About />
       <Laboratories />

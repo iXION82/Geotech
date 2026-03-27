@@ -7,6 +7,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+import { AnimatedTopography } from "@/components/ui/AnimatedTopography";
+
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
@@ -27,7 +29,10 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans transition-colors duration-500">{children}</body>
+      <body className="min-h-full flex flex-col font-sans transition-colors duration-500 bg-[#f2efe9]">
+        <AnimatedTopography />
+        {children}
+      </body>
     </html>
   );
 }

@@ -2,8 +2,9 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="bg-stone-900 text-stone-300 py-16 md:py-24 border-t-8 border-[#d8c29d]">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+    <footer className="relative text-stone-300 tracking-wide">
+      <div className="absolute inset-0 -z-10 bg-stone-900 border-t-8 border-[#d8c29d]" />
+      <div className="relative z-10 py-16 md:py-24 max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
         <div className="flex flex-col space-y-6 lg:col-span-2">
           <div className="relative w-64 h-20">
             <Image 
