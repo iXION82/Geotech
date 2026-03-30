@@ -15,7 +15,7 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   return (
-    <section ref={ref} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+    <section ref={ref} id="about" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
       {/* Background Image with Slow Zoom and Parallax */}
       <motion.div
         className="absolute inset-0 w-full h-[130%] -top-[15%]"
@@ -44,19 +44,19 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center text-center pt-20">
         <FadeIn delay={0.2} direction="up" className="mb-6">
           <span className="text-[#eedcb1] tracking-[0.25em] uppercase text-xs md:text-sm font-medium">
-            Indian Institute of Technology (ISM) Dhanbad
+            Dhanbad Chapter
           </span>
         </FadeIn>
         
         <FadeIn delay={0.5} direction="up">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#fdfbf7] mb-8 drop-shadow-xl max-w-5xl leading-[1.1]">
-            Geotechnical Engineering
+            Indian Geotechnical Society
           </h1>
         </FadeIn>
         
         <FadeIn delay={0.8} direction="up">
           <p className="text-[#e8e4df] text-lg md:text-2xl max-w-3xl mx-auto font-light drop-shadow-md leading-relaxed">
-            Unearthing the foundations of tomorrow through innovative research, rigorous fieldwork, and academic excellence.
+            Bridging geotechnical academia and industry, fostering innovation and sustainable engineering practices in the region since 2023.
           </p>
         </FadeIn>
       </div>

@@ -1,79 +1,88 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FadeIn } from "@/components/ui/FadeIn";
 import Image from "next/image";
 import { useRef } from "react";
 
 export function EntryFacilities() {
-  const ref = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: containerRef,
     offset: ["start end", "end start"],
   });
   
-  const y1 = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  // Parallax Sliding Mechanics
+  // As the section naturally scrolls up the screen, the images physically slide outward to reveal the hidden messaging beneath them.
+  const slideLeft = useTransform(scrollYProgress, [0.3, 0.7], ["0%", "-120%"]);
+  const slideRight = useTransform(scrollYProgress, [0.3, 0.7], ["0%", "120%"]);
+  
+  // Fades out the front layer cleanly as they exit the screen
+  const frontLayerOpacity = useTransform(scrollYProgress, [0.5, 0.7], [1, 0]);
+
+  // Gentle upward float for the deeply embedded final text
+  const endY = useTransform(scrollYProgress, [0.4, 0.8], [100, 0]);
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 w-full overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-[#ebe9e4]" />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 flex flex-col gap-16 md:gap-32">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
-          <div className="md:col-span-8 relative h-[50vh] md:h-[70vh] shadow-2xl overflow-hidden group">
-            <motion.div className="absolute inset-0 w-full h-[130%] -top-[15%]" style={{ y: y1 }}>
-              <Image
-                src="/Labgate.png"
-                alt="Geotechnical Engineering Laboratory Entrance"
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-            </motion.div>
-            <div className="absolute inset-0 bg-[#383632]/10 transition-opacity duration-500 group-hover:opacity-0 mix-blend-multiply" />
-            <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#ebe9e4]/95 backdrop-blur-sm border-l-4 border-[#8c887f] hidden md:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
-              <p className="text-[#383632] font-serif text-lg tracking-wide">Main Laboratory Entrance</p>
-              <p className="text-[#5c5a53] text-sm mt-1">Central Hub for Experimental Geotechnics</p>
-            </div>
-          </div>
-          <div className="md:col-span-4 flex flex-col justify-end space-y-6 pb-6">
-            <FadeIn delay={0.3}>
-              <h3 className="text-5xl md:text-6xl lg:text-7xl font-serif text-stone-800 leading-[1.1] md:leading-[1.1] mb-6">
-                Industry-Leading<br/>
-                <span className="text-[#8c8577] italic block mt-2">Equipment.</span>
-              </h3>
-            </FadeIn>
-            <FadeIn delay={0.2} direction="up">
-              <p className="text-[#5c5a53] font-light leading-relaxed">
-                Our main facilities stand as a testament to the department's unwavering commitment to cutting-edge research and hands-on academic excellence.
-              </p>
-            </FadeIn>
-          </div>
+    <section ref={containerRef} className="relative w-full min-h-[130vh] md:min-h-[150vh] bg-[#ebe9e4] overflow-hidden flex flex-col justify-center py-24">
+      
+      <div className="relative w-full max-w-7xl mx-auto px-6 h-[80vh] md:h-[90vh] flex items-center justify-center">
+        
+        {/* =========================================
+            LAYER 1: The Background "Gateway" Text
+            Sits patiently underneath everything, revealed only when the doors slide apart.
+            ========================================= */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
+          <motion.div style={{ y: endY }} className="flex flex-col items-center text-center">
+            <span className="text-xs md:text-sm font-medium tracking-widest text-[#8c8577] uppercase mb-4 md:mb-6">
+              The Gateway
+            </span>
+            <h3 className="text-5xl md:text-7xl lg:text-9xl font-serif text-stone-900 leading-none">
+              Designing the<br/>
+              <span className="italic font-light text-[#8c887f] block mt-2">Earth's Future.</span>
+            </h3>
+            <button className="mt-12 px-8 py-4 border border-stone-800 text-stone-800 hover:bg-stone-800 hover:text-[#ebe9e4] transition-colors duration-500 uppercase tracking-widest text-xs font-bold pointer-events-auto">
+              Join The Department
+            </button>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-          <div className="md:col-span-5 flex flex-col pt-12 md:pr-8">
-            <FadeIn direction="up">
-              <p className="text-[#5c5a53] font-light leading-relaxed mb-8">
-                With dedicated zones for soil mechanics, rock mass characterization, and geospatial analysis, our extensive infrastructure ensures comprehensive exploration.
-              </p>
-              <div className="w-12 h-[1px] bg-[#8c887f] mb-8" />
-              <span className="text-sm font-medium tracking-widest text-[#8c887f] uppercase">
-                Facility Overview
-              </span>
-            </FadeIn>
+        {/* =========================================
+            LAYER 2: The Two Massive Laboratory "Doors"
+            They natively slide apart to literally open the Gateway.
+            ========================================= */}
+        <motion.div 
+          className="absolute left-0 md:left-[5%] w-[45vw] md:w-[30vw] aspect-[3/4] shadow-2xl z-20 origin-bottom-left -rotate-3"
+          style={{ x: slideLeft, opacity: frontLayerOpacity }}
+        >
+          <Image src="/Labgate.png" alt="Lab Entrance" fill className="object-cover" />
+          <div className="absolute inset-0 bg-[#383632]/10 mix-blend-multiply" />
+        </motion.div>
+        
+        <motion.div 
+          className="absolute right-0 md:right-[5%] w-[45vw] md:w-[32vw] aspect-[4/5] shadow-2xl z-20 origin-bottom-right rotate-2 mt-32"
+          style={{ x: slideRight, opacity: frontLayerOpacity }}
+        >
+          <Image src="/LabTittle.png" alt="Lab Facilities" fill className="object-cover" />
+          <div className="absolute inset-0 bg-[#383632]/10 mix-blend-multiply" />
+        </motion.div>
+
+        {/* =========================================
+            LAYER 3: The Initial Title Layer
+            Floats cleanly on top of the images and vanishes alongside them.
+            ========================================= */}
+        <motion.div 
+          className="absolute z-30 pointer-events-none -top-12 md:top-0 left-0 right-0"
+          style={{ opacity: frontLayerOpacity }}
+        >
+          <div className="flex flex-col items-center justify-center text-center">
+            <h3 className="text-5xl md:text-7xl lg:text-8xl font-serif text-stone-800 leading-[1.1] drop-shadow-sm">
+              Industry-Leading<br/>
+              <span className="text-[#8c8577] italic block mt-3 drop-shadow-none">Equipment.</span>
+            </h3>
           </div>
-          <div className="md:col-span-7 relative h-[40vh] md:h-[60vh] shadow-xl overflow-hidden group">
-            <motion.div className="absolute inset-0 w-full h-[140%] -top-[20%]" style={{ y: y2 }}>
-              <Image
-                src="/LabTittle.png"
-                alt="Laboratory Facilities Overview"
-                fill
-                className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
-              />
-            </motion.div>
-            <div className="absolute inset-0 bg-[#383632]/10 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
-          </div>
-        </div>
+        </motion.div>
+
       </div>
     </section>
   );
