@@ -5,7 +5,6 @@ import { Laboratories } from "@/components/sections/Laboratories";
 import { ResearchWork } from "@/components/sections/ResearchWork";
 import { CampusIdentity } from "@/components/sections/CampusIdentity";
 import { EntryFacilities } from "@/components/sections/EntryFacilities";
-import { StudentChapter } from "@/components/sections/StudentChapter";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <ResearchWork />
       <CampusIdentity />
       <EntryFacilities />
-      <StudentChapter />
       <Footer />
     </main>
   );
