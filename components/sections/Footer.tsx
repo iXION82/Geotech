@@ -46,7 +46,7 @@ export function Footer() {
             <span className="absolute -bottom-1 left-0 w-6 h-[1px] bg-[#d8c29d]"></span>
           </h4>
           <ul className="space-y-2 text-stone-400 font-light mt-2 text-sm">
-            <li><a href="#" className="hover:text-white hover:translate-x-1 block transition-all">Contact Us</a></li>
+            <li><a href="/contact" className="hover:text-white hover:translate-x-1 block transition-all">Contact Us</a></li>
             <li><a href="#" className="hover:text-white hover:translate-x-1 block transition-all">Alumni Network</a></li>
             <li><a href="#" className="hover:text-white hover:translate-x-1 block transition-all">News & Events</a></li>
             <li><a href="#" className="hover:text-white hover:translate-x-1 block transition-all flex items-center gap-1"><Mail className="w-3 h-3"/> geotech@iitism.ac.in</a></li>
@@ -59,7 +59,7 @@ export function Footer() {
         <div className="mt-2 md:mt-0 text-center md:text-right flex flex-col gap-1">
           <p className="text-stone-400">Designing the Earth's Future</p>
           <p className="opacity-75">
-            Designed and developed by Trivalent (<a href="mailto:trivalent102103@gmail.com" className="hover:text-white transition-colors border-b border-transparent hover:border-white">trivalent102103@gmail.com</a>)
+            Designed and developed by <a href="mailto:trivalent102103@gmail.com" className="hover:text-white transition-colors border-b border-transparent hover:border-white">Trivalent</a>
           </p>
         </div>
       </div>

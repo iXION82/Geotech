@@ -54,7 +54,8 @@ export function Navbar({ isLight = false }: { isLight?: boolean }) {
             { name: "Events", href: "/events" },
             { name: "Committee", href: "/members" },
             { name: "Student Chapter", href: "/student-chapter" },
-            { name: "Membership", href: "/members#membership" }
+            { name: "Membership", href: "/members#membership" },
+            { name: "Contact", href: "/contact" }
           ].map((item) => (
             <Link
               key={item.name}

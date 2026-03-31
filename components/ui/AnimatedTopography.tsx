@@ -25,7 +25,7 @@ function WavyRings({ duration = 150, className = "", reverse = false }: { durati
 
 export function AnimatedTopography() {
   const pathname = usePathname();
-  const isCommittee = pathname?.startsWith("/members") || pathname?.startsWith("/igs");
+  const isCommittee = pathname?.startsWith("/members") || pathname?.startsWith("/igs") || pathname?.startsWith("/contact");
   const isStudent = pathname?.startsWith("/student-chapter");
 
   const mouseX = useSpring(0, { stiffness: 40, damping: 20 });
