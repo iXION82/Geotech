@@ -51,7 +51,7 @@ export function Navbar({ isLight = false }: { isLight?: boolean }) {
         <div className="hidden md:flex items-center gap-8">
           {[
             { name: "About", href: "/#about" },
-            { name: "Events", href: "/#events" },
+            { name: "Events", href: "/events" },
             { name: "Committee", href: "/members" },
             { name: "Membership", href: "/members#membership" }
           ].map((item) => (
