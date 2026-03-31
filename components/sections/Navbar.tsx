@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-export function Navbar() {
+export function Navbar({ isLight = false }: { isLight?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,6 +16,10 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const logoTextClass = scrolled || isLight ? "text-stone-800" : "text-[#fdfbf7]";
+  const linkClass = scrolled || isLight ? "text-stone-600 hover:text-stone-900" : "text-[#e8e4df] hover:text-white";
+  const buttonClass = scrolled || isLight ? "text-stone-800 border-stone-800 hover:bg-stone-800 hover:text-[#f2efe9]" : "text-[#e8e4df] border-[#e8e4df] hover:bg-[#e8e4df] hover:text-stone-900";
 
   return (
     <motion.nav
@@ -37,7 +41,7 @@ export function Navbar() {
               className="object-cover"
             />
           </div>
-          <div className={`flex flex-col ${scrolled ? "text-stone-800" : "text-[#fdfbf7]"}`}>
+          <div className={`flex flex-col transition-colors duration-500 ${logoTextClass}`}>
             <span className="font-serif font-bold text-lg md:text-xl leading-none">IGS</span>
             <span className="text-[10px] md:text-xs tracking-widest uppercase opacity-80 mt-1">Dhanbad Chapter</span>
           </div>
@@ -45,22 +49,23 @@ export function Navbar() {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-8">
-          {["About", "Objectives", "Committee", "Events", "Membership"].map((item) => (
-            <a
-              key={item}
-              href={`/#${item.toLowerCase()}`}
-              className={`text-sm tracking-wide font-medium transition-colors hover:opacity-100 ${
-                scrolled ? "text-stone-600 hover:text-stone-900" : "text-[#e8e4df] hover:text-white"
-              }`}
+          {[
+            { name: "About", href: "/#about" },
+            { name: "Events", href: "/#events" },
+            { name: "Committee", href: "/members" },
+            { name: "Membership", href: "/members#membership" }
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`text-sm tracking-wide font-medium transition-colors hover:opacity-100 ${linkClass}`}
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
           <Link 
             href="/igs" 
-            className={`text-sm tracking-wide font-medium transition-colors hover:opacity-100 border px-3 py-1 rounded-sm ${
-              scrolled ? "text-stone-800 border-stone-800 hover:bg-stone-800 hover:text-[#f2efe9]" : "text-[#e8e4df] border-[#e8e4df] hover:bg-[#e8e4df] hover:text-stone-900"
-            }`}
+            className={`text-sm tracking-wide font-medium transition-colors hover:opacity-100 border px-3 py-1 rounded-sm ${buttonClass}`}
           >
             About IGS (National)
           </Link>

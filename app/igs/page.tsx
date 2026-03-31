@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function IGSPage() {
   return (
     <main className="flex min-h-screen flex-col relative w-full">
-      <Navbar />
+      <Navbar isLight={true} />
       
       {/* Hero Section for IGS Page */}
       <section className="relative w-full pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden border-b border-[#e3eae0]">
