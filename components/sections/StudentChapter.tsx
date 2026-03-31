@@ -4,7 +4,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 export function StudentChapter() {
   return (
-    <section id="student-chapter" className="relative py-24 md:py-32 w-full bg-[#ecf0e9] border-t border-stone-200">
+    <section id="student-chapter" className="relative py-24 md:py-32 w-full border-t border-stone-200">
       <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
          <FadeIn delay={0.2} direction="up">
            <h3 className="text-xs md:text-sm font-medium tracking-widest text-[#6d8a67] uppercase mb-6">

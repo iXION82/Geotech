@@ -6,7 +6,7 @@ import { StudentChapter } from "@/components/sections/StudentChapter";
 
 export default function StudentChapterPage() {
   return (
-    <main className="flex min-h-screen flex-col relative w-full bg-[#f2efe9]">
+    <main className="flex min-h-screen flex-col relative w-full">
       <Navbar isLight={true} />
       
       <div className="flex-grow flex flex-col justify-center pt-24">

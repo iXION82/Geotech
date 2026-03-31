@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 
-function WavyRings({ duration = 150, className = "" }) {
+function WavyRings({ duration = 150, className = "", reverse = false }: { duration?: number, className?: string, reverse?: boolean }) {
   return (
     <motion.svg
       viewBox="0 0 1000 1000"
       className={`absolute ${className}`}
-      animate={{ rotate: 360 }}
+      animate={{ rotate: reverse ? -360 : 360 }}
       transition={{ duration, ease: "linear", repeat: Infinity }}
     >
       <g fill="none" stroke="currentColor" strokeWidth="2">
@@ -26,6 +26,7 @@ function WavyRings({ duration = 150, className = "" }) {
 export function AnimatedTopography() {
   const pathname = usePathname();
   const isCommittee = pathname?.startsWith("/members") || pathname?.startsWith("/igs");
+  const isStudent = pathname?.startsWith("/student-chapter");
 
   const mouseX = useSpring(0, { stiffness: 40, damping: 20 });
   const mouseY = useSpring(0, { stiffness: 40, damping: 20 });
@@ -51,10 +52,18 @@ export function AnimatedTopography() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const ringDuration = isCommittee ? 140 : 220;
-  const containerClass = isCommittee 
-    ? "fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-multiply text-[#6d8a67] opacity-[0.3]" 
-    : "fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-difference text-stone-200 opacity-[0.4]";
+  let ringDuration = 220;
+  let containerClass = "fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-difference text-stone-200 opacity-[0.4]";
+  let reverseRings = false;
+
+  if (isCommittee) {
+    ringDuration = 140;
+    containerClass = "fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-multiply text-[#6d8a67] opacity-[0.3]";
+  } else if (isStudent) {
+    ringDuration = 80;
+    reverseRings = true;
+    containerClass = "fixed inset-0 z-0 pointer-events-none overflow-hidden mix-blend-multiply text-[#8a7667] opacity-[0.4]";
+  }
 
   return (
     <motion.div 
@@ -65,7 +74,7 @@ export function AnimatedTopography() {
       }}
     >
       <motion.div style={{ x: xOffset, y: yOffset }} className="absolute inset-0 w-full h-full">
-        <WavyRings duration={ringDuration} className="w-[150vw] h-[150vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <WavyRings duration={ringDuration} reverse={reverseRings} className="w-[150vw] h-[150vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
       </motion.div>
     </motion.div>
   );
